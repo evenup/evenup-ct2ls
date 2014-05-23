@@ -48,6 +48,11 @@ class ct2ls::install {
     notify  => Class['ct2ls::service'],
   }
 
+  file { '/etc/init.d/ct2ls':
+    mode    => '0555',
+    source  => 'puppet:///modules/ct2ls/ct2ls.init',
+  }
+
   file { '/var/run/ct2ls':
     ensure  => 'directory',
     mode    => '0775',
