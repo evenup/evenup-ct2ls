@@ -1,0 +1,12 @@
+---
+  :access_key_id: <%= scope.lookupvar('::ct2ls::access_key_id') %>
+  :secret_access_key: <%= scope.lookupvar('::ct2ls::secret_access_key') %>
+  :sqs_queue: <%= scope.lookupvar('::ct2ls::sqs_queue') %>
+  :redis_host: <%= scope.lookupvar('::ct2ls::redis_host') %>
+  :redis_port: <%= scope.lookupvar('::ct2ls::redis_port') %>
+  :redis_db: <%= scope.lookupvar('::ct2ls::redis_db') %>
+  :redis_list: <%= scope.lookupvar('::ct2ls::redis_list') %>
+  :tmp_path: <%= scope.lookupvar('::ct2ls::tmp_path') %>
+  :remove_original: <%= scope.lookupvar('::ct2ls::remove_original') %>
+  :logpath: <%= scope.lookupvar('::ct2ls::logpath') %>
+  :loglevel: <%= scope.lookupvar('::ct2ls::log_level') %>

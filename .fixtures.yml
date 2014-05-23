@@ -1,0 +1,7 @@
+fixtures:
+  repositories:
+    ruby: https://github.com/evenup/evenup-ruby.git
+#    stdlib: https://github.com/puppetlabs/puppetlabs-stdlib.git
+  symlinks:
+    ct2ls: "#{source_dir}"
+

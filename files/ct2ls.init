@@ -1,0 +1,87 @@
+#!/bin/bash
+#
+#	/etc/rc.d/init.d/ct2ls
+#
+# Controls the ct2ls daemon
+#
+# chkconfig: 2345 20 80
+# description: Pulls Cloudtrail logs for S3 and pushes them to logstash
+# processname: ct2ls
+
+### BEGIN INIT INFO
+# Provides: ct2ls
+# Defalt-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Description: Pulls Cloudtrail logs for S3 and pushes them to logstash
+### END INIT INFO
+
+NAME=ct2ls
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+pidfile="/var/run/${NAME}/${NAME}.pid"
+
+RETVAL=0
+
+start() {
+	# Check if it is already running
+	if [ ! -f $pidfile ]; then
+	    echo -n $"Starting ${NAME} daemon: "
+        # daemon
+        cd /usr/share/${NAME}
+        daemon --user ${NAME} ruby ct2ls.rb start
+	    RETVAL=$?
+        if [ $RETVAL -eq 0 ]; then
+            echo_success
+        else
+            echo_failure
+        fi
+	    echo
+	fi
+	return $RETVAL
+}
+
+stop() {
+	echo -n $"Stopping ${NAME} daemon: "
+  cd /usr/share/${NAME}
+  daemon ruby ct2ls.rb stop
+  RETVAL=$?
+  if [ $RETVAL -eq 0 ]; then
+      echo_success
+  else
+      echo_failure
+  fi
+	echo
+  return $RETVAL
+}
+
+status() {
+  cd /usr/share/${NAME}
+  ruby ct2ls.rb status
+}
+
+restart() {
+	stop
+	start
+}
+
+case "$1" in
+start)
+    start
+    ;;
+stop)
+    stop
+    ;;
+restart)
+    restart
+    ;;
+status)
+    status -p "${pidfile}" $prog
+    ;;
+*)
+	echo $"Usage: $0 {start|stop|status|restart}"
+	exit 1
+esac
+
+exit $RETVAL
