@@ -1,5 +1,5 @@
 name 'evenup-ct2ls'
-version '0.0.1'
+version '0.0.2'
 author 'Justin Lambert <jlambert@letsevenup.com>'
 license 'Apache'
 summary 'Installs a daemon script to import logs from cloudtrail to logstash'
