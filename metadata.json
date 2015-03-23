@@ -1,0 +1,19 @@
+{
+  "name": "evenup-ct2ls",
+  "version": "0.0.2",
+  "author": "Justin Lambert <jlambert@letsevenup.com>",
+  "license": "Apache-2.0",
+  "summary": "Installs a daemon script to import logs from cloudtrail to logstash",
+  "source": "https://github.com/evenup/evenup-ct2ls",
+  "project_page": "https://github.com/evenup/evenup-ct2ls",
+  "issues_url": "https://github.com/evenup/evenup-ct2ls/issues",
+  "tags": ["logstash", "cloudtrail"],
+  "operatingsystem_support": [
+    { "operatingsystem": "RedHat", "operatingsystemrelease": [ "6", "7" ] },
+    { "operatingsystem": "CentOS", "operatingsystemrelease": [ "6", "7" ] },
+    { "operatingsystem": "Ubuntu", "operatingsystemrelease": [ "10.04", "12.04", "14.04" ] }
+  ],
+  "dependencies": [
+    { "name": "puppetlabs/stdlib", "version_requirement": ">=3.2.0 <5.0.0" }
+  ]
+}
