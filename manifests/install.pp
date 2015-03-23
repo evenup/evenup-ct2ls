@@ -7,15 +7,21 @@
 #
 # * Justin Lambert <mailto:jlambert@letsevenup.com>
 #
-#
-# === Copyright
-#
-# Copyright 2014 EvenUp.
-#
-class ct2ls::install {
+class ct2ls::install (
+  $install_gems    = $::ct2ls::install_gems,
+  $gem_provider    = $::ct2ls::gem_provider,
+  $dependency_gems = $::ct2ls::dependency_gems,
+){
 
   if $caller_module_name != $module_name {
     fail("Use of private class ${name} by ${caller_module_name}")
+  }
+
+  if $install_gems {
+    package { $dependency_gems:
+      ensure   => 'installed',
+      provider => $gem_provider,
+    }
   }
 
   user { 'ct2ls':

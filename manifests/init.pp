@@ -5,6 +5,18 @@
 #
 # === Parameters
 #
+# [*install_gems*]
+#   Boolean.  Whether or not gem dependencies should be managed
+#   Default: false
+#
+# [*gem_provider*]
+#   String.  Provider for managed gems to be installed iwth
+#   Default: gem
+#
+# [*dependency_gems*]
+#   Array of Strings.  List of dependencies to install.  Placed here to ease changing gem names for different providers
+#   Default: [ 'aws-sdk', 'redis', 'daemons' ],
+#
 # [*access_key_id*]
 #   String.  AWS Access Key
 #
@@ -57,32 +69,29 @@
 #
 # * Justin Lambert <mailto:jlambert@letsevenup.com>
 #
-#
-# === Copyright
-#
-# Copyright 2014 EvenUp.
-#
 class ct2ls (
   $access_key_id,
   $secret_access_key,
-  $sqs_queue          = 'cloudtrail',
-  $redis_host         = 'localhost',
-  $redis_port         = 6379,
-  $redis_db           = 0,
-  $tmp_path           = '/tmp',
-  $remove_original    = true,
-  $logpath            = '/var/log/ct2ls',
-  $log_level          = 'INFO',
+  $install_gems    = false,
+  $gem_provider    = 'gem',
+  $dependency_gems = [ 'aws-sdk', 'redis', 'daemons' ],
+  $sqs_queue       = 'cloudtrail',
+  $redis_host      = 'localhost',
+  $redis_port      = 6379,
+  $redis_db        = 0,
+  $redis_list      = 'logstash:cloudtrail',
+  $tmp_path        = '/tmp',
+  $remove_original = true,
+  $logpath         = '/var/log/ct2ls',
+  $log_level       = 'INFO',
 ) {
 
-  include ruby::aws_sdk
-  include ruby::redis
-  include ruby::daemons
+  validate_bool($install_gems)
 
-#  anchor { 'ct2ls::begin': } ->
   class { 'ct2ls::install': } ->
-  class { 'ct2ls::config': } ->
+  class { 'ct2ls::config': } ~>
   class { 'ct2ls::service': }
-#  anchor { 'ct2ls::end': }
+  Class['ct2ls::install'] ~> Class['ct2ls::service']
+
 
 }
