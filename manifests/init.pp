@@ -88,9 +88,9 @@ class ct2ls (
 
   validate_bool($install_gems)
 
-  class { 'ct2ls::install': } ->
-  class { 'ct2ls::config': } ~>
-  class { 'ct2ls::service': }
+  class { '::ct2ls::install': } ->
+  class { '::ct2ls::config': } ~>
+  class { '::ct2ls::service': }
   Class['ct2ls::install'] ~> Class['ct2ls::service']
 
 
