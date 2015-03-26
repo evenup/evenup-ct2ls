@@ -15,8 +15,8 @@
 class ct2ls::service {
 
   service { 'ct2ls':
-    ensure  => 'running',
-    enable  => 'true',
+    ensure => 'running',
+    enable => true,
   }
 
 }
