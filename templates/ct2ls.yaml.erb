@@ -1,6 +1,7 @@
 ---
   :access_key_id: <%= scope.lookupvar('::ct2ls::access_key_id') %>
   :secret_access_key: <%= scope.lookupvar('::ct2ls::secret_access_key') %>
+  :region: <%= scope.lookupvar('::ct2ls::region') %>
   :sqs_queue: <%= scope.lookupvar('::ct2ls::sqs_queue') %>
   :redis_host: <%= scope.lookupvar('::ct2ls::redis_host') %>
   :redis_port: <%= scope.lookupvar('::ct2ls::redis_port') %>

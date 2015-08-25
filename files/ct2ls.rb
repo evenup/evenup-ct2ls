@@ -22,7 +22,7 @@ class Cloudtrail2Logstash
     end
 
     # Set up AWS
-    AWS.config(:access_key_id => config[:access_key_id], :secret_access_key => config[:secret_access_key])
+    AWS.config(:access_key_id => config[:access_key_id], :secret_access_key => config[:secret_access_key], :region => config[:region])
     @queue = AWS::SQS.new.queues.named(config[:sqs_queue])
     @s3 = AWS::S3.new
 
