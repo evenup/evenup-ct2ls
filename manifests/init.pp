@@ -23,6 +23,10 @@
 # [*secret_access_key*]
 #   String.  AWS Secret Key
 #
+# [*region*]
+#   String.  Region SQS exists
+#   Default: us-east-1
+#
 # [*sqs_queue*]
 #   String.  Queue CloudTrail notifications are in
 #   Default: cloudtrail
@@ -75,6 +79,7 @@ class ct2ls (
   $install_gems    = false,
   $gem_provider    = 'gem',
   $dependency_gems = [ 'aws-sdk', 'redis', 'daemons' ],
+  $region          = 'us-east-1',
   $sqs_queue       = 'cloudtrail',
   $redis_host      = 'localhost',
   $redis_port      = 6379,
